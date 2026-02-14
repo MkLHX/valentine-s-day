@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pour toi, mon Amour 💕</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <div class="hearts-bg">
+      <span class="heart-float">❤️</span>
+      <span class="heart-float">💕</span>
+      <span class="heart-float">💗</span>
+      <span class="heart-float">❤️</span>
+      <span class="heart-float">💕</span>
+      <span class="heart-float">💗</span>
+      <span class="heart-float">❤️</span>
+    </div>
+
+    <div class="card" :class="{ 'success-state': saidYes }">
+      <!-- État initial : la question -->
+      <template v-if="!saidYes">
+        <div class="heart-icon">❤️</div>
+        <h1 class="title">Pour toi, mon Amour</h1>
+        <p class="subtitle">J'ai une question très importante à te poser...</p>
+        <p class="question">Veux-tu être ma Valentine ?</p>
+
+        <div class="buttons-container">
+          <button class="btn-oui" @click="saidYes = true">OUI !</button>
+          <div class="non-wrapper" ref="containerRef"></div>
+        </div>
+      </template>
+
+      <!-- État succès -->
+      <template v-else>
+        <div class="success-hearts">💕 ❤️ 💕</div>
+        <h2 class="success-message">Je t'aime !</h2>
+        <p class="success-sub">Tu as fait le plus beau choix du monde 💝</p>
+      </template>
+    </div>
+
+    <p class="footer">Créé avec amour pour toi 💕</p>
+
+    <!-- Bouton Non en dehors de la card pour éviter toute propagation -->
+    <button
+      v-if="!saidYes"
+      class="btn-non"
+      ref="nonBtnRef"
+      :style="nonButtonStyle"
+      @click.prevent
+      @mouseover="fleeNon"
+      @touchstart="fleeNon"
+    >
+      Non
+    </button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.4.21/vue.global.prod.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
